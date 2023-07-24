@@ -7,13 +7,15 @@ import com.technospace.arihantelectronic.entity.ShopEntity;
 import com.technospace.arihantelectronic.model.ShopModel;
 import com.technospace.arihantelectronic.repo.ShopRepo;
 import com.technospace.arihantelectronic.service.IShopInterface;
+import com.technospace.arihantelectronic.util.JMSUtil;
 
 @Service
 public class ShopService implements IShopInterface{
 
 	@Autowired
 	ShopRepo shopRepo;
-	
+	@Autowired
+	JMSUtil jmsUtil;
 	
 	@Override
 	public String adddetails(ShopModel shopModel) {
@@ -27,8 +29,10 @@ public class ShopService implements IShopInterface{
 		shopEntity.setEmailid(shopModel.getEmailid());
 		shopEntity.setAddress(shopModel.getAddress());
 		shopEntity.setMobno(shopModel.getMobno());
-		
+	
 		shopRepo.save(shopEntity);
+		
+		jmsUtil.sendmail(shopModel.getEmailid(), "Thank You Message", "Thank You So Much Sir, for coming in our shop and purchesing item.");
 		
 		return "Data added successfully...";
 	}
