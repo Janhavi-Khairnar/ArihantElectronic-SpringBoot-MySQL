@@ -8,6 +8,6 @@ import com.technospace.arihantelectronic.entity.ShopEntity;
 @Repository
 public interface ShopRepo extends JpaRepository<ShopEntity, Integer>{
 
-	
+	public ShopEntity getShopEntityByCid(int cid);
 	
 }

@@ -1,5 +1,7 @@
 package com.technospace.arihantelectronic.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,16 @@ public class ShopService implements IShopInterface{
 		jmsUtil.sendmail(shopModel.getEmailid(), "Thank You Message", "Thank You So Much Sir, for coming in our shop and purchesing item.");
 		
 		return "Data added successfully...";
+	}
+
+	@Override
+	public ShopEntity getinfobyid(int cid) {
+		return shopRepo.getShopEntityByCid(cid);
+	}
+
+	@Override
+	public List<ShopEntity> showalldetails() {
+		return shopRepo.findAll();
 	}
 
 	
